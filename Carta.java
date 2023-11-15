@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Carta {
     private int numero;
     private Palo palo;
@@ -28,5 +30,11 @@ public class Carta {
         return  numeroCarta + " de " + getPalo();
     }
 
-
+    public static String mostrarCartas(List<Carta> lista){
+        String resultado = "";
+        for(Carta c:lista){
+            resultado += c.toString() + "   ";
+        }
+        return resultado;
+    }
 }

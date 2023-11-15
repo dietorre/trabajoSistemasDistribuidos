@@ -1,9 +1,23 @@
-public class Pruebas{
-    public static void main(String[] args){
+public class Pruebas {
+    public static void main(String[] args) {
         Baraja b = new Baraja();
-        while(b.cartasRestantes() > 0){
-            Carta c = b.sacarCarta();
-            System.out.println(c);
+        Mesa m = new Mesa(b);
+        try {
+            m.sacarCarta();
+            m.sacarCarta();
+            m.sacarCarta();
+            m.sacarCarta();
+        } catch (NoMasCartasException e) {
+            e.printStackTrace();
         }
+        Jugador j = new Jugador();
+        try {
+            j.robarCarta(m.robarCarta());
+            j.robarCarta(m.robarCarta());
+            j.robarCarta(m.robarCarta());
+        } catch (NoMasCartasException e) {
+            e.printStackTrace();
+        }
+        j.jugarTurno(m.getCartasMesa());
     }
 }

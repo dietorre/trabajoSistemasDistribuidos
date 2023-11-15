@@ -14,16 +14,17 @@ public class Baraja {
         }
     }
 
-    public Carta sacarCarta(){
-        Random rand = new Random();
-        int numeroCarta = rand.nextInt(cartas.size());
+    public Carta sacarCarta() throws NoMasCartasException{
         if ((cartasRestantes()>0)) {
+            Random rand = new Random();
+            int numeroCarta = rand.nextInt(cartas.size());
             Carta resultado = cartas.get(numeroCarta);
             cartas.remove(numeroCarta);
             return resultado;
         }
+
         else{
-            return null;
+            throw new NoMasCartasException();
         }
     }
 
