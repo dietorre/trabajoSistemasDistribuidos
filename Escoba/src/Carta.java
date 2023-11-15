@@ -37,4 +37,19 @@ public class Carta {
         }
         return resultado;
     }
+    
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Carta)) {
+            return false;
+        }
+        Carta carta = (Carta) o;
+        return numero == carta.numero && palo == carta.palo;
+    }
+
+    
+    
 }
