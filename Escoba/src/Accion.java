@@ -5,13 +5,22 @@ public class Accion {
     private List<Carta> cartasRobadas;
 
 
-    public Accion(Carta cartaJugada, List<Carta> cartasRobadas) {
+    public Accion(Carta cartaJugada, List<Carta> cartasRobadas) throws JugadaIncorrectaException {
+        int sumaCartas = 0;
+        sumaCartas += cartaJugada.getNumero();
+        for(Carta c:cartasRobadas){
+            sumaCartas += c.getNumero();
+        }
+        if(sumaCartas== 15){
         this.cartaJugada = cartaJugada;
         this.cartasRobadas = cartasRobadas;
+        }
+        else{
+            throw new JugadaIncorrectaException();
+        }
     }
     
 
-    @Override
     public String toString() {
         return "{" +
             " cartaJugada='" + cartaJugada + "'" +
