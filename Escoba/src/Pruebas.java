@@ -7,6 +7,12 @@ public class Pruebas {
             m.sacarCarta();
             m.sacarCarta();
             m.sacarCarta();
+            m.sacarCarta();
+            m.sacarCarta();
+            m.sacarCarta();
+            m.sacarCarta();
+            m.sacarCarta();
+            m.sacarCarta();
         } catch (NoMasCartasException e) {
             e.printStackTrace();
         }
@@ -20,6 +26,7 @@ public class Pruebas {
         }
         Accion a = j.jugarTurno(m.getCartasMesa());
         System.out.println(a);
+
 
         // Carta c1 = new Carta(1,Palo.Oros);
         // Carta c2 = new Carta(1,Palo.Bastos);
