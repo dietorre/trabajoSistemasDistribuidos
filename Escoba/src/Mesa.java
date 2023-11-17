@@ -31,4 +31,14 @@ public class Mesa {
         return baraja.cartasRestantes();
     }
     
+    public void ejecutarAccion(Accion a){
+        if(a.getCartasRobadas().size() > 0){
+            cartas.removeAll(a.getCartasRobadas());
+        }
+        else{
+            cartas.add(a.getCartaJugada());
+        }
+        
+    }
+
 }

@@ -22,6 +22,15 @@ public class Accion {
     }
 
 
+    public Carta getCartaJugada() {
+        return this.cartaJugada;
+    }
+
+    public List<Carta> getCartasRobadas() {
+        return this.cartasRobadas;
+    }
+
+
     public String toString() {
         return "{" +
             " cartaJugada='" + cartaJugada + "'" +

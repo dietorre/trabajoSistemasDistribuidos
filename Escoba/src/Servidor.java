@@ -26,43 +26,21 @@ public class Servidor {
                     e.printStackTrace();
                 }
 
+                System.out.println(m);
+
                 j.robarCarta(m.robarCarta());
                 j.robarCarta(m.robarCarta());
                 j.robarCarta(m.robarCarta());
 
-                j.jugarTurno(m.getCartasMesa());
+                Accion a;
 
-                // String mensaje = "";
-                // mensaje += "robarCarta:";
-                // mensaje += m.robarCarta().toMensaje();
-                // out.write(mensaje);
-                // out.newLine();
+                a = j.jugarTurno(m.getCartasMesa());
+
+                m.ejecutarAccion(a);
+
+                System.out.println(m);
                 
-                // mensaje = "";
-                // mensaje += "robarCarta:";
-                // mensaje += m.robarCarta().toMensaje();
-                // out.write(mensaje);
-                // out.newLine();
-
-                // mensaje = "";
-                // mensaje += "robarCarta:";
-                // mensaje += m.robarCarta().toMensaje();
-                // out.write(mensaje);
-                // out.newLine();
                 
-
-                // mensaje = "";
-                // mensaje += "jugarTurno:";
-                // for (Carta c : m.getCartasMesa()) {
-                //     mensaje += c.toMensaje();
-                //     if(m.getCartasMesa().indexOf(c) != m.getCartasMesa().size()-1){
-                //         mensaje += ":";
-                //     }
-                // }
-
-                // out.write(mensaje);
-                // out.newLine();
-
 
                 String mensaje = "";
                 mensaje += "terminarPartida:";
