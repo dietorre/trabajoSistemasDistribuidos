@@ -1,7 +1,12 @@
+package Online;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.List;
+
+import Partida.Accion;
+import Partida.Carta;
+import Partida.JugadaIncorrectaException;
 
 public class JugadorOnline {
     

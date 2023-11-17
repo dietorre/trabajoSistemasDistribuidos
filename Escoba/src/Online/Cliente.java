@@ -1,3 +1,4 @@
+package Online;
 import java.io.BufferedReader; 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -6,6 +7,10 @@ import java.io.OutputStreamWriter;
 import java.net.Socket; 
 import java.util.ArrayList; 
 import java.util.List;
+
+import Partida.Accion;
+import Partida.Carta;
+import Partida.Jugador;
 
 public class Cliente {
     public static void main(String[] args) {

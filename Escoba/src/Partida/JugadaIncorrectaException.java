@@ -1,3 +1,4 @@
+package Partida;
 
 public class JugadaIncorrectaException extends Exception{
     private int sumaCartas;

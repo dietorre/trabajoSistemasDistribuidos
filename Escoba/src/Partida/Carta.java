@@ -1,3 +1,4 @@
+package Partida;
 import java.util.List;
 
 public class Carta {

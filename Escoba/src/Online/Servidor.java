@@ -1,3 +1,4 @@
+package Online;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -5,6 +6,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+
+import Partida.Accion;
+import Partida.Baraja;
+import Partida.JugadaIncorrectaException;
+import Partida.Mesa;
+import Partida.NoMasCartasException;
 
 public class Servidor {
     public static void main(String[] args) {
