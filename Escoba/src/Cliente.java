@@ -34,6 +34,8 @@ public class Cliente {
                         }
                         Accion a = jugador.jugarTurno(cartasMesa);
                         out.write(a.toMensage());
+                        out.newLine();
+                        out.flush();
                         break;
                     case "terminarPartida":
                         partidaTerminada = true;

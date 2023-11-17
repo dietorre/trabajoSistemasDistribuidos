@@ -22,19 +22,13 @@ public class Servidor {
                     m.sacarCarta();
                     m.sacarCarta();
                     m.sacarCarta();
-                    m.sacarCarta(); 
-                    m.sacarCarta();
-                    m.sacarCarta();
-                    m.sacarCarta();
-                    m.sacarCarta();
-                    m.sacarCarta();
                 } catch (NoMasCartasException e) {
                     e.printStackTrace();
                 }
 
                 j.robarCarta(m.robarCarta());
-                // j.robarCarta(m.robarCarta());
-                // j.robarCarta(m.robarCarta());
+                j.robarCarta(m.robarCarta());
+                j.robarCarta(m.robarCarta());
 
                 j.jugarTurno(m.getCartasMesa());
 
@@ -80,7 +74,7 @@ public class Servidor {
                 } catch (JugadaIncorrectaException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
-                }
+                } 
         }catch (IOException e) {
             e.printStackTrace();
         }

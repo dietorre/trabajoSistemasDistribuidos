@@ -20,6 +20,7 @@ public class JugadorOnline {
         try {
             out.write(mensaje);
             out.newLine();
+            out.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -36,6 +37,7 @@ public class JugadorOnline {
         }
         out.write(mensaje);
         out.newLine();
+        out.flush();
 
         String respuesta = in.readLine();
 
