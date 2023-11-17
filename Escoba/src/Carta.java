@@ -37,6 +37,10 @@ public class Carta {
         }
         return resultado;
     }
+
+    public String toMensaje(){
+        return String.valueOf(numero) + "," + palo.name();
+    }
     
 
     @Override
@@ -50,6 +54,12 @@ public class Carta {
         return numero == carta.numero && palo == carta.palo;
     }
 
+    public static Carta cartaFromText(String s){
+        String[] textoPartido = s.split(",");
+        int valor = Integer.parseInt(textoPartido[0]);
+        Palo palo = Palo.valueOf(textoPartido[1]);
+        return new Carta(valor, palo);
+    }
     
     
 }
