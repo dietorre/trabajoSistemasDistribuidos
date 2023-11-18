@@ -79,8 +79,44 @@ public class JugadorOnline implements Jugador{
     }
 
     @Override
-    public List<Carta> geCartasRobadas() {
+    public List<Carta> getCartasRobadas() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'geCartasRobadas'");
+    }
+
+    @Override
+    public int getEscobas() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getEscobas'");
+    }
+
+    @Override
+    public int getNumeroCartas() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getNumeroCartas'");
+    }
+
+    @Override
+    public int getOros() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getOros'");
+    }
+
+    @Override
+    public int getSietes() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getSietes'");
+    }
+
+    @Override
+    public String getNombre() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getNombre'");
+    }
+
+    @Override
+    public boolean sieteVelo() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'sieteVelo'");
     }
 }

@@ -16,7 +16,7 @@ public class Cliente {
             BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()))){
             
-            Jugador jugador = new JugadorOffline();
+            Jugador jugador = new JugadorOffline("Jugador 1");
             
             boolean partidaTerminada = false;
             while(!partidaTerminada){

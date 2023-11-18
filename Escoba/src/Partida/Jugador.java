@@ -14,6 +14,18 @@ public interface Jugador {
 
     void mostrarMano();
 
-    List<Carta> geCartasRobadas();
+    List<Carta> getCartasRobadas();
+
+    int getEscobas();
+
+    int getNumeroCartas();
+
+    int getOros();
+
+    int getSietes();
+
+    String getNombre();
+
+    boolean sieteVelo();
 
 }
