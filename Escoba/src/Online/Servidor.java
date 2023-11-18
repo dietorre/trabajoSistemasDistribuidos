@@ -7,11 +7,7 @@ import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import Partida.Accion;
-import Partida.Baraja;
-import Partida.JugadaIncorrectaException;
-import Partida.Mesa;
-import Partida.NoMasCartasException;
+import Partida.*;
 
 public class Servidor {
     public static void main(String[] args) {
@@ -42,7 +38,16 @@ public class Servidor {
                 Accion a;
 
                 a = j.jugarTurno(m.getCartasMesa());
+                m.ejecutarAccion(a);
 
+                System.out.println(m);
+
+                a = j.jugarTurno(m.getCartasMesa());
+                m.ejecutarAccion(a);
+
+                System.out.println(m);
+
+                a = j.jugarTurno(m.getCartasMesa());
                 m.ejecutarAccion(a);
 
                 System.out.println(m);
@@ -57,7 +62,6 @@ public class Servidor {
                 } catch (NoMasCartasException e) {
                     e.printStackTrace();
                 } catch (JugadaIncorrectaException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 } 
         }catch (IOException e) {

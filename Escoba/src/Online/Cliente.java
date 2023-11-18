@@ -8,9 +8,7 @@ import java.net.Socket;
 import java.util.ArrayList; 
 import java.util.List;
 
-import Partida.Accion;
-import Partida.Carta;
-import Partida.Jugador;
+import Partida.*;
 
 public class Cliente {
     public static void main(String[] args) {
@@ -18,12 +16,12 @@ public class Cliente {
             BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()))){
             
-            Jugador jugador = new Jugador();
+            Jugador jugador = new JugadorOffline();
             
             boolean partidaTerminada = false;
             while(!partidaTerminada){
                 String mensajeRecibido =  in.readLine();
-                System.out.println(mensajeRecibido);
+                // System.out.println(mensajeRecibido);
                 String[] textoPartido = mensajeRecibido.split(":");
 
                 switch (textoPartido[0]) {
@@ -31,16 +29,25 @@ public class Cliente {
                         Carta c = Carta.cartaFromText(textoPartido[1]);
                         jugador.robarCarta(c);
                         break;
+                    
+                    case "cogerCarta":
+                        c = Carta.cartaFromText(textoPartido[1]);
+                        jugador.cogerCarta(c);
+                        break;
 
                     case "jugarTurno":
                         List <Carta> cartasMesa = new ArrayList<>();
                         for(int i=1;i<textoPartido.length;i++){
                             cartasMesa.add(Carta.cartaFromText(textoPartido[i]));
                         }
-                        Accion a = jugador.jugarTurno(cartasMesa);
-                        out.write(a.toMensage());
-                        out.newLine();
-                        out.flush();
+                        try {
+                            Accion a = jugador.jugarTurno(cartasMesa);
+                            out.write(a.toMensage());
+                            out.newLine();
+                            out.flush();
+                        } catch (JugadaIncorrectaException e) {
+                            e.printStackTrace();
+                        }
                         break;
                     case "terminarPartida":
                         partidaTerminada = true;
