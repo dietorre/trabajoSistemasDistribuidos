@@ -23,7 +23,7 @@ public class Partida {
     public void jugarPartida(){
         try {
 
-            for(int i = 0;i<34;i++){
+            for(int i = 0;i<4;i++){
                 mesa.sacarCarta();
             }
             

@@ -123,6 +123,11 @@ public class JugadorOffline implements Jugador {
     }
 
     @Override
+    public void setEscobas(int e) {
+        escobas = e;
+    }
+
+    @Override
     public int getNumeroCartas() {
         return cartasRobadas.size();
     }

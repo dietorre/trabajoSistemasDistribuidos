@@ -18,6 +18,8 @@ public interface Jugador {
 
     int getEscobas();
 
+    void setEscobas(int e);
+
     int getNumeroCartas();
 
     int getOros();

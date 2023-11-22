@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 import Partida.*;
 
@@ -16,56 +18,21 @@ public class Servidor {
                 BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
                 BufferedWriter out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()))){
                 
-                JugadorOnline j = new JugadorOnline(in,out);
+                JugadorOnline j1 = new JugadorOnline(in,out);
 
                 Baraja b = new Baraja();
                 Mesa m = new Mesa(b);
-                try {
-                    m.sacarCarta();
-                    m.sacarCarta();
-                    m.sacarCarta();
-                    m.sacarCarta();
-                } catch (NoMasCartasException e) {
-                    e.printStackTrace();
-                }
+                List<Jugador> jugadores = new ArrayList<Jugador>();
+                jugadores.add(j1);
+                Partida p = new Partida(jugadores, m);
 
-                System.out.println(m);
-
-                j.robarCarta(m.robarCarta());
-                j.robarCarta(m.robarCarta());
-                j.robarCarta(m.robarCarta());
-
-                Accion a;
-
-                a = j.jugarTurno(m.getCartasMesa());
-                m.ejecutarAccion(a);
-
-                System.out.println(m);
-
-                a = j.jugarTurno(m.getCartasMesa());
-                m.ejecutarAccion(a);
-
-                System.out.println(m);
-
-                a = j.jugarTurno(m.getCartasMesa());
-                m.ejecutarAccion(a);
-
-                System.out.println(m);
+                p.jugarPartida();
                 
-                
-
-                String mensaje = "";
-                mensaje += "terminarPartida:";
-                out.write(mensaje);
-                out.newLine();
-
-                } catch (NoMasCartasException e) {
-                    e.printStackTrace();
-                } catch (JugadaIncorrectaException e) {
-                    e.printStackTrace();
-                } 
         }catch (IOException e) {
             e.printStackTrace();
         }
+    }catch(IOException e){
+        e.printStackTrace();
     }
+}
 }

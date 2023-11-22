@@ -49,6 +49,36 @@ public class Cliente {
                             e.printStackTrace();
                         }
                         break;
+                    case "mostrarMesa":
+                        cartasMesa = new ArrayList<>();
+                        for(int i=1;i<textoPartido.length;i++){
+                            cartasMesa.add(Carta.cartaFromText(textoPartido[i]));
+                        }
+                        jugador.mostrarMesa(cartasMesa);
+                        break;
+                    case "mostrarMano":
+                        jugador.mostrarMano();
+                        break;
+                    
+                    case "getCartasRobadas":
+                        String mensaje = "";
+                        for (Carta carta : jugador.getCartasRobadas()) {
+                            mensaje += carta.toMensaje();
+                            if(jugador.getCartasRobadas().indexOf(carta) != jugador.getCartasRobadas().size()-1){
+                                mensaje += ":";
+                            }
+                        }
+                        out.write(mensaje);
+                        out.newLine();
+                        out.flush();
+
+                        break;
+
+                    case "getNombre":
+                        out.write(jugador.getNombre());
+                        out.newLine();
+                        out.flush();
+                        break;
                     case "terminarPartida":
                         partidaTerminada = true;
                         break;
