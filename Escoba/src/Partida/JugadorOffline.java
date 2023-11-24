@@ -159,6 +159,17 @@ public class JugadorOffline implements Jugador {
         return cartasRobadas.indexOf(new Carta(7,Palo.Oros)) != -1;
     }
 
+    @Override
+    public void nuevaRonda() {
+        this.cartasRobadas.clear();
+        this.setEscobas(0);
+        this.mano.clear();
+    }
+
+    @Override
+    public void terminarPartida() {
+    }
+
     
 
 }

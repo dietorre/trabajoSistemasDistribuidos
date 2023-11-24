@@ -30,4 +30,8 @@ public interface Jugador {
 
     boolean sieteVelo();
 
+    void nuevaRonda();
+
+    void terminarPartida();
+
 }

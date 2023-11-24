@@ -23,7 +23,7 @@ public class Partida {
     public void jugarPartida(){
         try {
 
-            for(int i = 0;i<4;i++){
+            for(int i = 0;i<34;i++){
                 mesa.sacarCarta();
             }
             
@@ -52,6 +52,10 @@ public class Partida {
             addPuntos();
 
             System.out.println(puntuaciones);
+
+            for (Jugador jugador : jugadores) {
+                jugador.terminarPartida();
+            }
             
 
         } catch (NoMasCartasException e) {
@@ -97,8 +101,13 @@ public class Partida {
         }
 
         for (Jugador jugador : jugadores) {
-            puntuaciones.put(jugador, puntuaciones.get(jugador) + jugador.getEscobas());
+            int sieteVelo = 0;
+            if(jugador.sieteVelo()){
+                sieteVelo = 1;
+            }   
+            puntuaciones.put(jugador, puntuaciones.get(jugador) + jugador.getEscobas() +sieteVelo);
         }
+
 
     }
 
@@ -111,12 +120,13 @@ public class Partida {
         Jugador masOros = jugadores.get(0);
 
         for(int i=1;i<jugadores.size();i++){
-            if(jugadores.get(i).getOros() > masOros.getOros()){
-                masOros = jugadores.get(i);
-            }
             if(jugadores.get(i).getOros() == masOros.getOros()){
                 return null;
             }
+            if(jugadores.get(i).getOros() > masOros.getOros()){
+                masOros = jugadores.get(i);
+            }
+            
         }
 
         return masOros;
@@ -132,12 +142,12 @@ public class Partida {
         Jugador masSietes = jugadores.get(0);
 
         for(int i=1;i<jugadores.size();i++){
-            if(jugadores.get(i).getSietes() > masSietes.getSietes()){
-                masSietes = jugadores.get(i);
-            }
             if(jugadores.get(i).getSietes() == masSietes.getSietes()){
                 return null;
             }
+            if(jugadores.get(i).getSietes() > masSietes.getSietes()){
+                masSietes = jugadores.get(i);
+            } 
         }
 
         return masSietes;
@@ -153,12 +163,13 @@ public class Partida {
         Jugador masCartas = jugadores.get(0);
 
         for(int i=1;i<jugadores.size();i++){
-            if(jugadores.get(i).getNumeroCartas() > masCartas.getNumeroCartas()){
-                masCartas = jugadores.get(i);
-            }
             if(jugadores.get(i).getNumeroCartas() == masCartas.getNumeroCartas()){
                 return null;
             }
+            if(jugadores.get(i).getNumeroCartas() > masCartas.getNumeroCartas()){
+                masCartas = jugadores.get(i);
+            }
+            
         }
 
         return masCartas;

@@ -14,9 +14,13 @@ public class Cliente {
     public static void main(String[] args) {
         try(Socket s = new Socket("localhost",55555);
             BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()))){
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+            BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in))){
+
+            System.out.println("Introduce el nombre del jugador:");
+            String nombre = teclado.readLine();
             
-            Jugador jugador = new JugadorOffline("Jugador 1");
+            Jugador jugador = new JugadorOffline(nombre);
             
             boolean partidaTerminada = false;
             while(!partidaTerminada){
@@ -79,10 +83,45 @@ public class Cliente {
                         out.newLine();
                         out.flush();
                         break;
-                    case "terminarPartida":
-                        partidaTerminada = true;
+
+                    case "getEscobas":
+                        out.write(String.valueOf(jugador.getEscobas()));
+                        out.newLine();
+                        out.flush();
                         break;
 
+                    case "setEscobas":
+                        jugador.setEscobas(Integer.parseInt(textoPartido[1]));
+                        break;
+                    case "getNumeroCartas":
+                        out.write(String.valueOf(jugador.getNumeroCartas()));
+                        out.newLine();
+                        out.flush();
+                        break;
+                    
+                    case "getOros":
+                        out.write(String.valueOf(jugador.getOros()));
+                        out.newLine();
+                        out.flush();
+                        break;
+                    case "getSietes":
+                        out.write(String.valueOf(jugador.getSietes()));
+                        out.newLine();
+                        out.flush();
+                        break;
+                    case "getSieteVelo":
+                        out.write(String.valueOf(jugador.sieteVelo()));
+                        out.newLine();
+                        out.flush();
+                        break;    
+                    case "nuevaRonda":
+                        jugador.nuevaRonda();
+                        break;
+                    
+                    case "terminarPartida":
+                        partidaTerminada = true;
+                        s.close();
+                        break;
                     default:
                         break;
                 }

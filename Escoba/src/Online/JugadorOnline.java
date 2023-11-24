@@ -2,6 +2,9 @@ package Online;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,12 +12,19 @@ import Partida.*;
 
 public class JugadorOnline implements Jugador{
     
-    BufferedReader in;
-    BufferedWriter out;
+    private Socket s;
+    private BufferedReader in;
+    private BufferedWriter out;
 
-    public JugadorOnline(BufferedReader in, BufferedWriter out){
-        this.in = in;
-        this.out = out;
+    public JugadorOnline(Socket s){
+        try {
+            this.s = s;
+            this.in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            this.out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
     }
 
     private void sendMensaje(String mensaje){
@@ -100,32 +110,60 @@ public class JugadorOnline implements Jugador{
 
     @Override
     public int getEscobas() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getEscobas'");
+        String mensaje = "getEscobas:";
+        sendMensaje(mensaje);
+        try {
+            String respuesta = in.readLine();
+            return Integer.parseInt(respuesta);
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     @Override
     public void setEscobas(int e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setEscobas'");
+        String mensaje = "setEscobas:" + e;
+        sendMensaje(mensaje);
     }
 
     @Override
     public int getNumeroCartas() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getNumeroCartas'");
+        String mensaje = "getNumeroCartas:";
+        sendMensaje(mensaje);
+        try {
+            String respuesta = in.readLine();
+            return Integer.parseInt(respuesta);
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     @Override
     public int getOros() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getOros'");
+        String mensaje = "getOros:";
+        sendMensaje(mensaje);
+        try {
+            String respuesta = in.readLine();
+            return Integer.parseInt(respuesta);
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     @Override
     public int getSietes() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getSietes'");
+        String mensaje = "getSietes:";
+        sendMensaje(mensaje);
+        try {
+            String respuesta = in.readLine();
+            return Integer.parseInt(respuesta);
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     @Override
@@ -135,7 +173,6 @@ public class JugadorOnline implements Jugador{
         try {
             return in.readLine();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return null;
@@ -143,9 +180,34 @@ public class JugadorOnline implements Jugador{
 
     @Override
     public boolean sieteVelo() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'sieteVelo'");
+        String mensaje = "getSieteVelo:";
+        sendMensaje(mensaje);
+        try {
+            String respuesta = in.readLine();
+            return Boolean.parseBoolean(respuesta);
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
+
+    public void nuevaRonda(){
+        String mensaje = "nuevaRonda:";
+        sendMensaje(mensaje);
+    }
+
+    @Override
+    public void terminarPartida() {
+        String mensaje = "terminarPartida:";
+        sendMensaje(mensaje);
+        try {
+            s.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    
 
     
 }
