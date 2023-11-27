@@ -30,7 +30,7 @@ public class JugadorOffline implements Jugador {
             mostrarMesa(cartasEnMesa);
             while(true){
                 try {
-
+                    System.out.println();
                     System.out.println("Elige la carta a jugar: ");
                     int i = Integer.parseInt(teclado.readLine());
                     Carta jugada = mano.get(i);
@@ -97,12 +97,14 @@ public class JugadorOffline implements Jugador {
 
     @Override
     public void mostrarMesa(List<Carta> cartasEnMesa){
+        System.out.println();
         System.out.println("Cartas en la mesa:");
         System.out.println(Carta.mostrarCartas(cartasEnMesa));
     }
 
     @Override
     public void mostrarMano(){
+        System.out.println();
         System.out.println("Cartas en mano:");
         System.out.println(Carta.mostrarCartas(mano));
     }
@@ -168,6 +170,20 @@ public class JugadorOffline implements Jugador {
 
     @Override
     public void terminarPartida() {
+    }
+
+    @Override
+    public void turnoOtroJugador(Jugador j, Accion a) {
+        System.out.println();
+        System.out.println("El jugador "+ j.getNombre() + " ha usado la carta:");
+        System.out.println(a.getCartaJugada());
+        if(a.getCartasRobadas().size() > 0){
+            System.out.println("Y ha cogido las cartas:");
+            for (Carta carta : a.getCartasRobadas()) {
+                System.out.print(carta.toString() + "   ");
+            }
+            System.out.println();
+        }
     }
 
     

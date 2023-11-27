@@ -34,4 +34,6 @@ public interface Jugador {
 
     void terminarPartida();
 
+    void turnoOtroJugador(Jugador j, Accion a);
+
 }

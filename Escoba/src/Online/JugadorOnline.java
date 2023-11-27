@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import Partida.*; 
 
 public class JugadorOnline implements Jugador{
@@ -205,6 +206,15 @@ public class JugadorOnline implements Jugador{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void turnoOtroJugador(Jugador j, Accion a) {
+        String mensaje = "turnoOtroJugador:";
+        mensaje += j.getNombre();
+        mensaje += ":";
+        mensaje += a.toMensage();
+        sendMensaje(mensaje);
     }
 
     

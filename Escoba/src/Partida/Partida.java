@@ -23,7 +23,7 @@ public class Partida {
     public void jugarPartida(){
         try {
 
-            for(int i = 0;i<34;i++){
+            for(int i = 0;i<4;i++){
                 mesa.sacarCarta();
             }
             
@@ -40,6 +40,12 @@ public class Partida {
                         mesa.ejecutarAccion(a);
                         if(a.getCartasRobadas().size() > 0){
                             ultimoJugadorRobado = jugador;
+                        }
+                        for (Jugador j : jugadores) {
+                            if(!j.equals(jugador)){
+                                j.turnoOtroJugador(jugador, a);
+                            }
+                            
                         }
                     }
                 }

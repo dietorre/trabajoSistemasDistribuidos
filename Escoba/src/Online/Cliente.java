@@ -4,8 +4,10 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Array;
 import java.net.Socket; 
-import java.util.ArrayList; 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import Partida.*;
@@ -122,12 +124,20 @@ public class Cliente {
                         partidaTerminada = true;
                         s.close();
                         break;
+                    case "turnoOtroJugador":
+                        Jugador j = new JugadorOffline(textoPartido[1]);
+                        Accion a = Accion.fromMensaje(mensajeRecibido.substring(textoPartido[0].length()+textoPartido[1].length()+2));
+                        jugador.turnoOtroJugador(j, a);
+                        break;
                     default:
                         break;
                 }
 
             }
         }catch(IOException e){
+            e.printStackTrace();
+        } catch (JugadaIncorrectaException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
