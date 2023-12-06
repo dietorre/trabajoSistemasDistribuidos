@@ -29,6 +29,15 @@ public class Baraja {
         }
     }
 
+    public void reiniciarBaraja(){
+        cartas.clear();
+        for(Palo p:Palo.values()){
+            for(int i=1;i<=10;i++){
+                cartas.add(new Carta(i, p));
+            }
+        }
+    }
+
     public int cartasRestantes(){
         return cartas.size();
     }

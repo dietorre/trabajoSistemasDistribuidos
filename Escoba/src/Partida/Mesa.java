@@ -42,4 +42,9 @@ public class Mesa {
         
     }
 
+    public void reiniciarMesa(){
+        cartas.clear();
+        baraja.reiniciarBaraja();
+    }
+
 }

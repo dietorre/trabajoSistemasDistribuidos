@@ -20,10 +20,10 @@ public class Partida {
         }
     }
 
-    public void jugarPartida(){
+    public void jugarRonda(){
         try {
 
-            for(int i = 0;i<4;i++){
+            for(int i = 0;i<34;i++){
                 mesa.sacarCarta();
             }
             
@@ -56,18 +56,36 @@ public class Partida {
             }
 
             addPuntos();
-
-            System.out.println(puntuaciones);
-
             for (Jugador jugador : jugadores) {
-                jugador.terminarPartida();
+                jugador.finalRonda(puntuaciones);
+                jugador.nuevaRonda();
             }
-            
+            System.out.println(puntuaciones);
 
         } catch (NoMasCartasException e) {
             e.printStackTrace();
         } catch (JugadaIncorrectaException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void jugarPartida(){
+        while(puntuaciones.get(jugadorMasPuntos()) < 21){
+            jugarRonda();
+
+            //Roto a los jugadores
+            Jugador primerJugador = jugadores.get(0);
+            jugadores.remove(0);
+            jugadores.add(primerJugador);
+
+            mesa.reiniciarMesa();
+            ultimas = false;
+        }
+
+        System.out.println(puntuaciones);
+
+        for (Jugador jugador : jugadores) {
+            jugador.terminarPartida();
         }
     }
 
@@ -179,6 +197,19 @@ public class Partida {
         }
 
         return masCartas;
+
+    }
+
+    private Jugador jugadorMasPuntos(){
+        Jugador resultado = jugadores.get(0);
+        
+        for (Jugador jugador : jugadores) {
+            if(puntuaciones.get(resultado) < puntuaciones.get(jugador)){
+                resultado = jugador;
+            }
+        }
+
+        return resultado;
 
     }
     

@@ -3,6 +3,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.List;
 
 public class JugadorOffline implements Jugador {
@@ -186,6 +188,20 @@ public class JugadorOffline implements Jugador {
         }
     }
 
-    
+    public String toString(){
+        return this.nombre;
+    }
+
+    @Override
+    public void finalRonda(Dictionary<Jugador, Integer> puntuaciones) {
+        System.out.println();
+        System.out.println("Fin de la ronda");
+        System.out.println("Puntuaciones actuales:");
+        Enumeration<Jugador> en = puntuaciones.keys();
+        while (en.hasMoreElements()){
+            Jugador j = en.nextElement();
+            System.out.println("El jugador " + j + " tiene " + puntuaciones.get(j) +  " puntos");
+        }
+    }
 
 }

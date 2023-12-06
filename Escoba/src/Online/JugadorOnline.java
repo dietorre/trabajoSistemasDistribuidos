@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.List;
 
 
@@ -218,6 +220,23 @@ public class JugadorOnline implements Jugador{
     }
 
     
+    public String toString(){
+        return this.getNombre();
+    }
 
+    @Override
+    public void finalRonda(Dictionary<Jugador, Integer> puntuaciones) {
+        String mensaje = "finalRonda:";
+        Enumeration<Jugador> en = puntuaciones.keys();
+        while (en.hasMoreElements()) {
+            Jugador j = en.nextElement();
+            mensaje += j.getNombre() + ":";
+            mensaje += puntuaciones.get(j);
+            if(en.hasMoreElements()){
+                mensaje += ":";
+            }
+        }
+        sendMensaje(mensaje);
+    }
     
 }

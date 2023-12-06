@@ -4,10 +4,10 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Array;
 import java.net.Socket; 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 
 import Partida.*;
@@ -118,6 +118,14 @@ public class Cliente {
                         break;    
                     case "nuevaRonda":
                         jugador.nuevaRonda();
+                        break;
+
+                    case "finalRonda":
+                        Dictionary<Jugador, Integer> puntuaciones = new Hashtable<>();
+                        for(int i=1;i<textoPartido.length;i+=2){
+                            puntuaciones.put(new JugadorOffline(textoPartido[i]), Integer.parseInt(textoPartido[i+1]));
+                        }
+                        jugador.finalRonda(puntuaciones);
                         break;
                     
                     case "terminarPartida":

@@ -1,5 +1,6 @@
 package Partida;
 
+import java.util.Dictionary;
 import java.util.List;
 
 public interface Jugador {
@@ -31,6 +32,8 @@ public interface Jugador {
     boolean sieteVelo();
 
     void nuevaRonda();
+
+    void finalRonda(Dictionary<Jugador,Integer> puntuaciones);
 
     void terminarPartida();
 
