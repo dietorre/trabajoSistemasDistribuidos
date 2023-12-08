@@ -211,8 +211,15 @@ public class JugadorOnline implements Jugador{
     }
 
     @Override
-    public void turnoOtroJugador(Jugador j, Accion a) {
-        String mensaje = "turnoOtroJugador:";
+    public void principioTurnoOtroJugador(Jugador j) {
+        String mensaje = "principioTurnoOtroJugador:";
+        mensaje += j.getNombre();
+        sendMensaje(mensaje);
+    }
+
+    @Override
+    public void finalTurnoOtroJugador(Jugador j, Accion a) {
+        String mensaje = "finalTurnoOtroJugador:";
         mensaje += j.getNombre();
         mensaje += ":";
         mensaje += a.toMensage();

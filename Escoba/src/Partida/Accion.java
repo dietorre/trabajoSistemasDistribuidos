@@ -6,8 +6,10 @@ public class Accion {
     private Carta cartaJugada;
     private List<Carta> cartasRobadas;
     private int sumaCartas;
+    private boolean escoba;
 
-    public Accion(Carta cartaJugada, List<Carta> cartasRobadas) throws JugadaIncorrectaException {
+    public Accion(Carta cartaJugada, List<Carta> cartasRobadas, boolean escoba) throws JugadaIncorrectaException {
+        this.escoba = escoba;
         sumaCartas = 0;
         sumaCartas += cartaJugada.getNumero();
         for(Carta c:cartasRobadas){
@@ -31,6 +33,10 @@ public class Accion {
         return this.cartasRobadas;
     }
 
+    public boolean isEscoba(){
+        return escoba;
+    }
+
 
     public String toString() {
         return "{" +
@@ -45,10 +51,10 @@ public class Accion {
         mensaje += ":";
         for (Carta carta : cartasRobadas) {
             mensaje += carta.toMensaje();
-            if(cartasRobadas.indexOf(carta) != cartasRobadas.size() - 1){
-                mensaje += ":";
-            }
+            mensaje += ":";
         }
+        mensaje += Boolean.toString(escoba);
+
         return mensaje;
     }
 
@@ -56,10 +62,11 @@ public class Accion {
         String[] stringCortada = s.split(":");
         Carta cartaJugada = Carta.cartaFromText(stringCortada[0]);
         List<Carta> cartasRobadas = new ArrayList<>();
-        for(int i=1;i<stringCortada.length;i++){
+        for(int i=1;i<stringCortada.length-1;i++){
             cartasRobadas.add(Carta.cartaFromText(stringCortada[i]));
         }
-        return new Accion(cartaJugada, cartasRobadas);
+        boolean escoba = Boolean.parseBoolean(stringCortada[stringCortada.length-1]);
+        return new Accion(cartaJugada, cartasRobadas,escoba);
     }
 
 }

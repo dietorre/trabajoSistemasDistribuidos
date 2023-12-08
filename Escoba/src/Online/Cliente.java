@@ -132,10 +132,14 @@ public class Cliente {
                         partidaTerminada = true;
                         s.close();
                         break;
-                    case "turnoOtroJugador":
+                    case "principioTurnoOtroJugador":
                         Jugador j = new JugadorOffline(textoPartido[1]);
+                        jugador.principioTurnoOtroJugador(j);
+                        break;
+                    case "finalTurnoOtroJugador":
+                        j = new JugadorOffline(textoPartido[1]);
                         Accion a = Accion.fromMensaje(mensajeRecibido.substring(textoPartido[0].length()+textoPartido[1].length()+2));
-                        jugador.turnoOtroJugador(j, a);
+                        jugador.finalTurnoOtroJugador(j, a);
                         break;
                     default:
                         break;

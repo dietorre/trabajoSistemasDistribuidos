@@ -28,6 +28,8 @@ public class JugadorOffline implements Jugador {
     public Accion jugarTurno(List<Carta> cartasEnMesa){
         try{
             BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println();
+            System.out.println("TU TURNO:");
             mostrarMano();
             mostrarMesa(cartasEnMesa);
             while(true){
@@ -52,7 +54,7 @@ public class JugadorOffline implements Jugador {
                         if(robadas.indexOf(cartasEnMesa.get(i)) == -1){
                             robadas.add(cartasEnMesa.get(i));
                             cartasRobadas.add(cartasEnMesa.get(i));
-                            System.out.println("Has elegido: " + cartasEnMesa.get(i));
+                            System.out.println("Has elegido: " + cartasEnMesa.get(i) + " (linea en blanco para terminar)");
                         }
                         else{
                             System.out.println("Esa carta ya ha sido elegida");
@@ -68,12 +70,18 @@ public class JugadorOffline implements Jugador {
                         }
                     }
 
-                
-                    Accion a = new Accion(jugada, robadas);
-                    mano.remove(jugada);
-                    if(cartasEnMesa.size() == robadas.size()){
+                    boolean escoba = false;
+
+                    if((robadas.size() > 0) && (cartasEnMesa.size() == robadas.size())){
                         escobas ++;
+                        escoba = true;
                     }
+
+                    Accion a = new Accion(jugada, robadas, escoba);
+
+                    mano.remove(jugada);
+                    
+                    System.out.println("TURNO TERMINADO");
                     return a;
                 } catch (JugadaIncorrectaException e) {
                     System.out.println("La suma de las cartas elegidas no es 15, es "+ e.getSumaCartas()); 
@@ -174,8 +182,13 @@ public class JugadorOffline implements Jugador {
     public void terminarPartida() {
     }
 
+    public void principioTurnoOtroJugador(Jugador j){
+        System.out.println();
+        System.out.println("Turno de " + j.getNombre() + "...");
+    }
+
     @Override
-    public void turnoOtroJugador(Jugador j, Accion a) {
+    public void finalTurnoOtroJugador(Jugador j, Accion a) {
         System.out.println();
         System.out.println("El jugador "+ j.getNombre() + " ha usado la carta:");
         System.out.println(a.getCartaJugada());
@@ -185,6 +198,9 @@ public class JugadorOffline implements Jugador {
                 System.out.print(carta.toString() + "   ");
             }
             System.out.println();
+        }
+        if(a.isEscoba()){
+            System.out.println("¡ESCOBA!");
         }
     }
 

@@ -23,7 +23,7 @@ public class Partida {
     public void jugarRonda(){
         try {
 
-            for(int i = 0;i<34;i++){
+            for(int i = 0;i<4;i++){
                 mesa.sacarCarta();
             }
             
@@ -36,6 +36,12 @@ public class Partida {
                 for(int i=0;i<cartasRepartidas;i++){
                     for (Jugador jugador : jugadores) {
                         System.out.println("Turno del jugador " + jugador.getNombre() + ":");
+                        for (Jugador j : jugadores) {
+                            if(!j.equals(jugador)){
+                                j.principioTurnoOtroJugador(jugador);
+                            }
+                            
+                        }
                         Accion a = jugador.jugarTurno(mesa.getCartasMesa());
                         mesa.ejecutarAccion(a);
                         if(a.getCartasRobadas().size() > 0){
@@ -43,7 +49,7 @@ public class Partida {
                         }
                         for (Jugador j : jugadores) {
                             if(!j.equals(jugador)){
-                                j.turnoOtroJugador(jugador, a);
+                                j.finalTurnoOtroJugador(jugador, a);
                             }
                             
                         }
