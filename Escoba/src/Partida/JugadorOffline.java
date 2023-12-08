@@ -8,7 +8,7 @@ import java.util.Enumeration;
 import java.util.List;
 
 public class JugadorOffline implements Jugador {
-    private List<Carta> mano;
+    protected List<Carta> mano;
     private List<Carta> cartasRobadas;
     private int escobas;
     public String nombre;
