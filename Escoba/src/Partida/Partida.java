@@ -30,12 +30,12 @@ public class Partida {
             Jugador ultimoJugadorRobado = jugadores.get(0);
 
             while(!ultimas){
-                System.out.println("Repartiendo cartas...");
+                // System.out.println("Repartiendo cartas...");
                 int cartasRepartidas = repartir();
         
                 for(int i=0;i<cartasRepartidas;i++){
                     for (Jugador jugador : jugadores) {
-                        System.out.println("Turno del jugador " + jugador.getNombre() + ":");
+                        // System.out.println("Turno del jugador " + jugador.getNombre() + ":");
                         for (Jugador j : jugadores) {
                             if(!j.equals(jugador)){
                                 j.principioTurnoOtroJugador(jugador);
@@ -66,7 +66,7 @@ public class Partida {
                 jugador.finalRonda(puntuaciones);
                 jugador.nuevaRonda();
             }
-            System.out.println(puntuaciones);
+            // System.out.println(puntuaciones);
 
         } catch (NoMasCartasException e) {
             e.printStackTrace();
@@ -88,7 +88,6 @@ public class Partida {
             ultimas = false;
         }
 
-        System.out.println(puntuaciones);
 
         for (Jugador jugador : jugadores) {
             jugador.terminarPartida();
@@ -206,8 +205,10 @@ public class Partida {
 
     }
 
-    private Jugador jugadorMasPuntos(){
-        Jugador resultado = jugadores.get(0);
+    public Jugador jugadorMasPuntos(){
+
+        if(jugadores.size()>0){
+            Jugador resultado = jugadores.get(0);
         
         for (Jugador jugador : jugadores) {
             if(puntuaciones.get(resultado) < puntuaciones.get(jugador)){
@@ -216,6 +217,11 @@ public class Partida {
         }
 
         return resultado;
+        }else{
+            return null;
+        }
+
+        
 
     }
     

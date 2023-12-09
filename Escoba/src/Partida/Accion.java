@@ -7,6 +7,7 @@ public class Accion {
     private List<Carta> cartasRobadas;
     private int sumaCartas;
     private boolean escoba;
+    private List<Carta> cartasRestantes;
 
     public Accion(Carta cartaJugada, List<Carta> cartasRobadas, boolean escoba) throws JugadaIncorrectaException {
         this.escoba = escoba;
@@ -24,6 +25,27 @@ public class Accion {
         }
     }
 
+    public Accion(Carta cartaJugada, List<Carta> cartasRobadas, boolean escoba, List<Carta> cartasRestantes) throws JugadaIncorrectaException {
+        this.escoba = escoba;
+        this.cartasRestantes = cartasRestantes;
+        sumaCartas = 0;
+        sumaCartas += cartaJugada.getNumero();
+        for(Carta c:cartasRobadas){
+            sumaCartas += c.getNumero();
+        }
+        if(sumaCartas== 15 || cartasRobadas.size() == 0){
+            this.cartaJugada = cartaJugada;
+            this.cartasRobadas = cartasRobadas;
+        }
+        else{
+            throw new JugadaIncorrectaException(sumaCartas);
+        }
+    }
+
+
+    public List<Carta> getCartasRestantes(){
+        return cartasRestantes;
+    } 
 
     public Carta getCartaJugada() {
         return this.cartaJugada;

@@ -2,28 +2,26 @@ package Partida;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.List;
 
-public class JugadorIA extends JugadorOffline {
+public abstract class JugadorIA extends JugadorOffline {
 
     public JugadorIA(String nombre) {
         super(nombre);
     }
 
-    public Accion jugarTurno(List<Carta> cartasEnMesa){
-        List<Accion> accionesPosibles = jugadasPosibles(cartasEnMesa);
-        Accion a = accionesPosibles.get(accionesPosibles.size()-1);
-        mano.remove(a.getCartaJugada());
-        System.out.println(a);
-        return a;
-    }
+    public abstract Accion jugarTurno(List<Carta> cartasEnMesa);
 
-    private List<Accion> jugadasPosibles(List<Carta> cartasEnMesa){
+    protected List<Accion> jugadasPosibles(List<Carta> cartasEnMesa){
         List<Accion> resultado = new ArrayList<>();
         for(List<Carta> posibleAccion : jugadasTotales(cartasEnMesa)){
             for (Carta cartaEnMano:this.mano) {
                 try{
-                    Accion a = new Accion(cartaEnMano, posibleAccion, posibleAccion.size() !=0 && (posibleAccion.size() == cartasEnMesa.size()));
+                    List<Carta> cartasRestantes = new ArrayList<>();
+                    cartasRestantes.addAll(cartasEnMesa);
+                    cartasRestantes.removeAll(posibleAccion);
+                    Accion a = new Accion(cartaEnMano, posibleAccion, posibleAccion.size() !=0 && (posibleAccion.size() == cartasEnMesa.size()),cartasRestantes);
                     resultado.add(a);
 
                 }catch(JugadaIncorrectaException e){
@@ -34,6 +32,8 @@ public class JugadorIA extends JugadorOffline {
         // System.out.println(resultado);
         return resultado;
     }
+
+    
 
     private List<List<Carta>> jugadasTotales(List<Carta> cartasEnMesa){
         List<List<Carta>> resultado = new ArrayList<>();
@@ -70,11 +70,9 @@ public class JugadorIA extends JugadorOffline {
         
     }
 
-
     @Override
     public void finalRonda(Dictionary<Jugador, Integer> puntuaciones) {
-      
+        
     }
-
 
 }

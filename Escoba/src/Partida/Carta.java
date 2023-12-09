@@ -34,7 +34,7 @@ public class Carta {
     public static String mostrarCartas(List<Carta> lista){
         String resultado = "";
         for(Carta c:lista){
-            resultado += lista.indexOf(c) +  ":" + c.toString() + "   ";
+            resultado += lista.indexOf(c) + ":" + c.toString() + "   ";
         }
         return resultado;
     }

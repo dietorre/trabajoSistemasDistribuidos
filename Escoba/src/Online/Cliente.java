@@ -4,7 +4,10 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.Socket; 
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -14,15 +17,62 @@ import Partida.*;
 
 public class Cliente {
     public static void main(String[] args) {
-        try(Socket s = new Socket("localhost",55555);
-            BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
-            BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in))){
-
+        try(BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in))){
             System.out.println("Introduce el nombre del jugador:");
             String nombre = teclado.readLine();
             
             Jugador jugador = new JugadorOffline(nombre);
+
+
+            String IP = "";
+            boolean IPvalida = false;
+            while(!IPvalida){
+                System.out.println("Introduce la IP en la que se encuentra la partida (localhost por defecto)");
+                IP = teclado.readLine();
+                if(!IP.isBlank()){
+                    try{
+                        InetAddress.getByName(IP);
+                        IPvalida = true; 
+                    }catch(UnknownHostException e){
+                       System.out.println("IP no válida");
+                    }
+                }
+                else{
+                    IP = "localhost";
+                    IPvalida = true; 
+                }
+                
+            }
+
+            int puerto = 0;
+            while(!(puerto > 0)){
+                System.out.println("Introduce el puerto en la que se encuentra la partida");
+                String leido = teclado.readLine();
+                try{
+                    puerto = Integer.parseInt(leido);
+                    if(!(puerto > 0)){
+                        System.out.println("Número de puerto no válido");
+                    }
+                }catch(NumberFormatException e){
+                    System.out.println("Entrada no válida");
+                }
+            }
+
+            jugarPartida(jugador, IP, puerto);
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+        
+
+    public static void jugarPartida(Jugador jugador,String IP, int puerto){
+        try(Socket s = new Socket(IP,puerto);
+            BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+            ){
+
+            
             
             boolean partidaTerminada = false;
             while(!partidaTerminada){
@@ -153,4 +203,5 @@ public class Cliente {
             e.printStackTrace();
         }
     }
+    
 }

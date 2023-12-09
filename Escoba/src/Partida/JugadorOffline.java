@@ -9,8 +9,8 @@ import java.util.List;
 
 public class JugadorOffline implements Jugador {
     protected List<Carta> mano;
-    private List<Carta> cartasRobadas;
-    private int escobas;
+    protected List<Carta> cartasRobadas;
+    protected int escobas;
     public String nombre;
 
     public JugadorOffline(String nombre) {
@@ -54,6 +54,7 @@ public class JugadorOffline implements Jugador {
                         if(robadas.indexOf(cartasEnMesa.get(i)) == -1){
                             robadas.add(cartasEnMesa.get(i));
                             cartasRobadas.add(cartasEnMesa.get(i));
+                            cartasRobadas.add(jugada);
                             System.out.println("Has elegido: " + cartasEnMesa.get(i) + " (linea en blanco para terminar)");
                         }
                         else{
