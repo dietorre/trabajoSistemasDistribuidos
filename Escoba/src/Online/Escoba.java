@@ -25,6 +25,7 @@ public class Escoba {
                         
                             int puerto = crearPartida(teclado);
                             unirseAPartida(teclado,"localhost",puerto);
+                            terminar = true;
 
                         }catch(IOException e){
                             System.out.println("Error al crear partida");
