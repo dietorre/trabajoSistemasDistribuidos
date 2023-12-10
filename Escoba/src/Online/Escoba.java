@@ -153,7 +153,7 @@ public class Escoba {
 
     private static void reglasEscoba(){
         System.out.println("Reglas:");
-        System.out.println("El objetivo del juego es obtener el máximo número de puntos. Cuando un jugador llega a 21, gana el jugador con más puntos");
+        System.out.println("El objetivo del juego es obtener el máximo número de puntos. Cuando un jugador llega a 21, se acaba la partida, y gana el jugador con más puntos");
         System.out.println("Los puntos se obtienen en función de las cartas robadas");
         System.out.println("Cada turno, el jugador debe usar una de las cartas de su mano");
         System.out.println("Con esa carta, el jugador puede robar cartas de la mesa, siempre que la suma de la carta usada mas las cartas robadas sea 15");
