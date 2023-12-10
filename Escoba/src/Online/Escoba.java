@@ -93,59 +93,59 @@ public class Escoba {
     
     public static int crearPartida(BufferedReader teclado) throws IOException{
         int numeroJugadores = 0;
-            int numeroIA = 0;
-            while(numeroJugadores + numeroIA == 0){
-                numeroJugadores = -1;
-                while(!(numeroJugadores >= 0)){
-                    System.out.println("Introduce el número de jugadores:");
-                    String leido = teclado.readLine();
-                    try{
-                        numeroJugadores = Integer.parseInt(leido);
-                        if(!(numeroJugadores >= 0)){
-                            System.out.println("Número no válido de jugadores");
-                        }
-                    }catch(NumberFormatException e){
-                        System.out.println("Entrada no válida");
-                    }
-                    
-                }
+        int numeroIA = 0;
+        while(numeroJugadores + numeroIA == 0){
 
-                numeroIA = -1;
-                while(!(numeroIA >= 0)){
-                    System.out.println("Introduce el número de bots:");
-                    String leido = teclado.readLine();
-                    try{
-                        numeroIA = Integer.parseInt(leido);
-                        if(!(numeroIA >= 0)){
-                            System.out.println("Número no válido de bots");
-                        }
-                    }catch(NumberFormatException e){
-                        System.out.println("Entrada no válida");
-                    }
-                }
-                if(numeroJugadores + numeroIA == 0 ){
-                    System.out.println("El número total de jugadores debe ser mayor que 0");
-                }
-            }
-            int puerto = 0;
-            while(!(puerto > 0)){
-                System.out.println("Introduce el puerto en el que crear  la partida:");
+            while(!(numeroJugadores > 0)){
+                System.out.println("Introduce el número de jugadores:");
                 String leido = teclado.readLine();
                 try{
-                    puerto = Integer.parseInt(leido);
-                    if(!(puerto > 0)){
-                        System.out.println("Número de puerto no válido");
+                    numeroJugadores = Integer.parseInt(leido);
+                    if(!(numeroJugadores >= 0)){
+                        System.out.println("Número no válido de jugadores");
+                    }
+                }catch(NumberFormatException e){
+                    System.out.println("Entrada no válida");
+                }
+                
+            }
+
+            numeroIA = -1;
+            while(!(numeroIA >= 0)){
+                System.out.println("Introduce el número de bots:");
+                String leido = teclado.readLine();
+                try{
+                    numeroIA = Integer.parseInt(leido);
+                    if(!(numeroIA >= 0)){
+                        System.out.println("Número no válido de bots");
                     }
                 }catch(NumberFormatException e){
                     System.out.println("Entrada no válida");
                 }
             }
+            if(numeroJugadores + numeroIA == 0 ){
+                System.out.println("El número total de jugadores debe ser mayor que 0");
+            }
+        }
+        int puerto = 0;
+        while(!(puerto > 0)){
+            System.out.println("Introduce el puerto en el que crear  la partida:");
+            String leido = teclado.readLine();
+            try{
+                puerto = Integer.parseInt(leido);
+                if(!(puerto > 0)){
+                    System.out.println("Número de puerto no válido");
+                }
+            }catch(NumberFormatException e){
+                System.out.println("Entrada no válida");
+            }
+        }
 
-            Thread th = new Thread(new HiloCrearPartida(puerto,numeroJugadores,numeroIA));
+        Thread th = new Thread(new HiloCrearPartida(puerto,numeroJugadores,numeroIA));
 
-            th.start();
+        th.start();
 
-            return puerto;
+        return puerto;
     }
 
     private static void unirseAPartida(BufferedReader teclado,String IP,int puerto) {
