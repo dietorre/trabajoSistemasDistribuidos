@@ -4,7 +4,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -18,12 +17,7 @@ import Partida.*;
 public class Cliente {
     public static void main(String[] args) {
         try(BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in))){
-            System.out.println("Introduce el nombre del jugador:");
-            String nombre = teclado.readLine();
             
-            Jugador jugador = new JugadorOffline(nombre);
-
-
             String IP = "";
             boolean IPvalida = false;
             while(!IPvalida){
@@ -58,7 +52,7 @@ public class Cliente {
                 }
             }
 
-            jugarPartida(jugador, IP, puerto);
+            jugarPartida(IP, puerto);
 
         }catch(IOException e){
             e.printStackTrace();
@@ -66,13 +60,16 @@ public class Cliente {
     }
         
 
-    public static void jugarPartida(Jugador jugador,String IP, int puerto){
+    public static void jugarPartida(String IP, int puerto){
         try(Socket s = new Socket(IP,puerto);
             BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
-            ){
+            BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in))){
 
+            System.out.println("Introduce el nombre del jugador:");
+            String nombre = teclado.readLine();
             
+            Jugador jugador = new JugadorOffline(nombre);
             
             boolean partidaTerminada = false;
             while(!partidaTerminada){

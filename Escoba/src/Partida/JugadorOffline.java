@@ -75,6 +75,7 @@ public class JugadorOffline implements Jugador {
 
                     if((robadas.size() > 0) && (cartasEnMesa.size() == robadas.size())){
                         escobas ++;
+                        System.out.println("¡ESCOBA!");
                         escoba = true;
                     }
 
