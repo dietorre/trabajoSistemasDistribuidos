@@ -70,31 +70,32 @@ public class Servidor {
 
 
     public static void crearPartida(int puerto, int nJugadores, int nIA) throws IOException {
-        ServerSocket ss = new ServerSocket(puerto);
-        List<Jugador> jugadores = new ArrayList<Jugador>();
-        System.out.println("Esperando jugadores...");
-        for(int i=0;i<nJugadores;i++){
-            try{
-                Socket s = ss.accept();
-                JugadorOnline j = new JugadorOnline(s);
-                System.out.println("Jugador " + j.getNombre() + " conectado");
-                jugadores.add(j);
-            }catch(IOException e){
-                e.printStackTrace();
+        try (ServerSocket ss = new ServerSocket(puerto)) {
+            List<Jugador> jugadores = new ArrayList<Jugador>();
+            System.out.println("Esperando jugadores...");
+            for(int i=0;i<nJugadores;i++){
+                try{
+                    Socket s = ss.accept();
+                    JugadorOnline j = new JugadorOnline(s);
+                    System.out.println("Jugador " + j.getNombre() + " conectado");
+                    jugadores.add(j);
+                }catch(IOException e){
+                    e.printStackTrace();
+                }
             }
+
+            for (int i = 0; i < nIA; i++) {
+                JugadorIA j = new JugadorIANormal("IA "+ (i+1));
+                jugadores.add(j);
+            }
+
+            Baraja b = new Baraja();
+            Mesa m = new Mesa(b);
+
+            Partida p = new Partida(jugadores, m);
+
+            p.jugarPartida();
         }
-
-        for (int i = 0; i < nIA; i++) {
-            JugadorIA j = new JugadorIANormal("IA "+ (i+1));
-            jugadores.add(j);
-        }
-
-        Baraja b = new Baraja();
-        Mesa m = new Mesa(b);
-
-        Partida p = new Partida(jugadores, m);
-
-        p.jugarPartida();
             
         
     }
